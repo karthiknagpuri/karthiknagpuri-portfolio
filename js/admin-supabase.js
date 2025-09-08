@@ -407,10 +407,20 @@ async function handleBlogSubmit(e) {
 }
 
 window.editBlog = async function(id) {
-    const { data: blogs } = await db.getBlogs();
-    const blog = blogs.find(b => b.id === id);
+    const { data: blogs, error } = await db.getBlogs();
+    
+    if (error) {
+        console.error('Error loading blogs:', error);
+        showErrorMessage('Failed to load blogs: ' + (error.message || error));
+        return;
+    }
+    
+    const blog = blogs ? blogs.find(b => b.id === id) : null;
     if (blog) {
         showBlogEditor(blog);
+    } else {
+        console.error('Blog not found with ID:', id);
+        showErrorMessage('Blog not found. It may have been deleted.');
     }
 };
 
@@ -508,10 +518,20 @@ async function handleProjectSubmit(e) {
 }
 
 window.editProject = async function(id) {
-    const { data: projects } = await db.getProjects();
-    const project = projects.find(p => p.id === id);
+    const { data: projects, error } = await db.getProjects();
+    
+    if (error) {
+        console.error('Error loading projects:', error);
+        showErrorMessage('Failed to load projects: ' + (error.message || error));
+        return;
+    }
+    
+    const project = projects ? projects.find(p => p.id === id) : null;
     if (project) {
         showProjectEditor(project);
+    } else {
+        console.error('Project not found with ID:', id);
+        showErrorMessage('Project not found. It may have been deleted.');
     }
 };
 
@@ -607,10 +627,20 @@ async function handleResourceSubmit(e) {
 }
 
 window.editResource = async function(id) {
-    const { data: resources } = await db.getResources();
-    const resource = resources.find(r => r.id === id);
+    const { data: resources, error } = await db.getResources();
+    
+    if (error) {
+        console.error('Error loading resources:', error);
+        showErrorMessage('Failed to load resources: ' + (error.message || error));
+        return;
+    }
+    
+    const resource = resources ? resources.find(r => r.id === id) : null;
     if (resource) {
         showResourceEditor(resource);
+    } else {
+        console.error('Resource not found with ID:', id);
+        showErrorMessage('Resource not found. It may have been deleted.');
     }
 };
 
