@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Shelf - Karthik Nagapuri</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/resource-shelf.css">
+    <meta name="description" content="Curated resources on startups, AI, development, and entrepreneurship">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="nav-brand"></a>
+        <a href="/blog.html" class="nav-link">blog</a>
+        <a href="/resources.html" class="nav-link active">resources</a>
+        <a href="https://medium.com/@Karthiknagapuri" class="nav-link">writings</a>
+        <div class="nav-right">
+            <a href="https://github.com/karthiknagapuri" class="nav-link">github</a>
+            <a href="https://twitter.com/karthiknagpuri" class="nav-link">twitter</a>
+            <a href="https://linkedin.com/in/karthiknagpuri" class="nav-link">linkedin</a>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </div>
+
+    <main class="container">
+        <div class="resource-shelf-header" style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="font-size: 1.5rem; margin-bottom: 0.5rem;">resources</h1>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                curated links worth your time
+            </p>
+        </div>
+        
+        <div class="resource-shelf-actions" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+            <input type="text" id="resource-search" class="resource-search" placeholder="search..." onkeyup="filterPublicResources()" style="max-width: 300px;">
+            <select id="resource-filter" class="resource-filter" onchange="filterPublicResources()" style="max-width: 200px;">
+                <option value="">all</option>
+                <option value="startup">startup</option>
+                <option value="ai">ai</option>
+                <option value="development">dev</option>
+                <option value="design">design</option>
+                <option value="marketing">growth</option>
+                <option value="productivity">productivity</option>
+                <option value="finance">finance</option>
+                <option value="leadership">leadership</option>
+                <option value="learning">learning</option>
+            </select>
+        </div>
+
+
+        <div id="resource-shelf-container" class="resource-shelf-container">
+            <!-- Resources will be displayed here -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Karthik Nagapuri. Curated with AI assistance.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/resource-shelf.js"></script>
+    <script>
+        // Public resource display
+        function filterPublicResources() {
+            const search = document.getElementById('resource-search').value;
+            const category = document.getElementById('resource-filter').value;
+            resourceShelf.renderResources({ search, category });
+            updateStats();
+        }
+
+        function updateStats() {
+            // Removed stats for minimal design
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load and display resources
+            resourceShelf.renderResources();
+            updateStats();
+            
+            // Hide admin actions for public view
+            document.querySelectorAll('.resource-actions').forEach(el => {
+                el.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

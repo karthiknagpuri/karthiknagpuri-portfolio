@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Add Resource</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--bg-darker);
+            border-radius: 8px;
+        }
+        button {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .status {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Resource Shelf - Add Resource</h1>
+    
+    <div class="test-section">
+        <h2>Add Substack Article</h2>
+        <p>URL: https://henrythe9th.substack.com/p/how-to-start-a-lean-ai-native-startup</p>
+        <button onclick="addSubstackArticle()">Add Resource</button>
+        <div id="status" class="status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>View Resources</h2>
+        <button onclick="viewResources()">View All Resources</button>
+        <div id="resources-list" class="status"></div>
+    </div>
+
+    <script src="js/resource-shelf.js"></script>
+    <script>
+        const statusEl = document.getElementById('status');
+        const resourcesList = document.getElementById('resources-list');
+        
+        async function addSubstackArticle() {
+            statusEl.textContent = 'Adding resource...';
+            
+            try {
+                const url = 'https://henrythe9th.substack.com/p/how-to-start-a-lean-ai-native-startup';
+                
+                // Step 1: Scrape URL
+                statusEl.textContent += '\n\n1. Scraping URL...';
+                const scrapedData = await resourceShelf.scrapeUrl(url);
+                statusEl.textContent += '\n   Title: ' + scrapedData.title;
+                statusEl.textContent += '\n   Author: ' + scrapedData.author;
+                statusEl.textContent += '\n   Description: ' + scrapedData.description;
+                
+                // Step 2: Enrich with AI (if API key is available)
+                statusEl.textContent += '\n\n2. Enriching with AI...';
+                let enrichedData;
+                try {
+                    enrichedData = await resourceShelf.enrichWithGemini(scrapedData);
+                    statusEl.textContent += '\n   Category: ' + (enrichedData.category || 'startup');
+                    statusEl.textContent += '\n   Quality Score: ' + (enrichedData.qualityScore || 8);
+                    statusEl.textContent += '\n   Reading Time: ' + (enrichedData.readingTime || 5) + ' minutes';
+                } catch (aiError) {
+                    statusEl.textContent += '\n   AI enrichment failed (may need valid API key), using defaults';
+                    enrichedData = resourceShelf.basicCategorization(scrapedData);
+                }
+                
+                // Step 3: Create resource object
+                const resource = {
+                    url: url,
+                    title: enrichedData.title || scrapedData.title,
+                    description: enrichedData.summary || scrapedData.description,
+                    category: enrichedData.category || 'startup',
+                    tags: enrichedData.tags || ['ai', 'startup', 'lean'],
+                    author: scrapedData.author,
+                    readingTime: enrichedData.readingTime || 5,
+                    qualityScore: enrichedData.qualityScore || 8,
+                    keyTakeaways: enrichedData.keyTakeaways || [
+                        'Start with AI-native approach',
+                        'Focus on lean methodology',
+                        'Build for the future'
+                    ],
+                    dateAdded: new Date().toISOString(),
+                    favorite: false
+                };
+                
+                // Step 4: Add to collection
+                statusEl.textContent += '\n\n3. Adding to collection...';
+                await resourceShelf.addResource(resource);
+                
+                statusEl.textContent += '\n\n✅ Resource added successfully!';
+                statusEl.textContent += '\n\nResource details:';
+                statusEl.textContent += '\n' + JSON.stringify(resource, null, 2);
+                
+            } catch (error) {
+                statusEl.textContent += '\n\n❌ Error: ' + error.message;
+                console.error('Error adding resource:', error);
+            }
+        }
+        
+        function viewResources() {
+            const resources = resourceShelf.resources;
+            if (resources.length === 0) {
+                resourcesList.textContent = 'No resources found. Add some first!';
+            } else {
+                resourcesList.textContent = 'Total resources: ' + resources.length + '\n\n';
+                resources.forEach((resource, index) => {
+                    resourcesList.textContent += `${index + 1}. ${resource.title}\n`;
+                    resourcesList.textContent += `   Category: ${resource.category}\n`;
+                    resourcesList.textContent += `   URL: ${resource.url}\n`;
+                    resourcesList.textContent += `   Quality: ${resource.qualityScore}/10\n`;
+                    resourcesList.textContent += `   Added: ${new Date(resource.dateAdded).toLocaleDateString()}\n\n`;
+                });
+            }
+        }
+    </script>
+</body>
+</html>

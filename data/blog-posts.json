@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "The Beauty of Minimal Design",
+      "date": "2024-01-15",
+      "excerpt": "Exploring how less can truly be more in modern web design and user experience.",
+      "content": "In a world filled with complexity, minimal design stands as a beacon of clarity. It's not about removing features, but about finding the perfect balance between functionality and simplicity.",
+      "tags": ["design", "minimalism", "ux"],
+      "readTime": "5 min",
+      "author": "Karthik Nagapuri"
+    },
+    {
+      "id": 2,
+      "title": "Building Fast Web Applications",
+      "date": "2024-01-10",
+      "excerpt": "Performance optimization techniques for modern web applications without sacrificing functionality.",
+      "content": "Speed matters. Every millisecond counts when it comes to user experience. Let's explore practical techniques to make your web applications lightning fast.",
+      "tags": ["performance", "javascript", "web"],
+      "readTime": "8 min",
+      "author": "Karthik Nagapuri"
+    },
+    {
+      "id": 3,
+      "title": "The Future of Web Development",
+      "date": "2024-01-05",
+      "excerpt": "Thoughts on emerging technologies and trends shaping the future of web development.",
+      "content": "As we move forward, the web continues to evolve. From WebAssembly to AI-powered development tools, the future holds exciting possibilities.",
+      "tags": ["future", "technology", "web"],
+      "readTime": "6 min",
+      "author": "Karthik Nagapuri"
+    },
+    {
+      "id": 4,
+      "title": "Writing Clean Code",
+      "date": "2024-01-01",
+      "excerpt": "Best practices for writing maintainable and readable code that your future self will thank you for.",
+      "content": "Clean code is not just about following rules. It's about writing code that tells a story, code that is a joy to work with.",
+      "tags": ["programming", "best-practices", "clean-code"],
+      "readTime": "7 min",
+      "author": "Karthik Nagapuri"
+    }
+  ]
+}

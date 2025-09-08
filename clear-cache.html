@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Cache</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 2rem;
+            background: #000;
+            color: #0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .status {
+            margin: 1rem 0;
+            padding: 1rem 2rem;
+            border: 1px solid #0f0;
+            border-radius: 4px;
+        }
+        .success { border-color: #0f0; color: #0f0; }
+        .error { border-color: #f00; color: #f00; }
+        .info { border-color: #ff0; color: #ff0; }
+        button {
+            background: #0f0;
+            color: #000;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 1rem;
+            font-family: monospace;
+        }
+        button:hover {
+            background: #0a0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cache Cleaner</h1>
+    <div id="status" class="status info">Ready to clear cache...</div>
+    
+    <button onclick="clearEverything()">Clear All Caches</button>
+    <button onclick="window.location.href='/'">Go to Homepage</button>
+    
+    <script>
+        async function clearEverything() {
+            const statusDiv = document.getElementById('status');
+            let messages = [];
+            
+            try {
+                // 1. Clear Service Worker caches
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    for (const name of cacheNames) {
+                        await caches.delete(name);
+                        messages.push(`✅ Deleted cache: ${name}`);
+                    }
+                    if (cacheNames.length === 0) {
+                        messages.push('ℹ️ No caches found');
+                    }
+                }
+                
+                // 2. Unregister service workers
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    for (const registration of registrations) {
+                        await registration.unregister();
+                        messages.push(`✅ Unregistered service worker: ${registration.scope}`);
+                    }
+                    if (registrations.length === 0) {
+                        messages.push('ℹ️ No service workers found');
+                    }
+                }
+                
+                // 3. Clear localStorage
+                if (window.localStorage) {
+                    const keys = Object.keys(localStorage);
+                    localStorage.clear();
+                    messages.push(`✅ Cleared localStorage (${keys.length} items)`);
+                }
+                
+                // 4. Clear sessionStorage
+                if (window.sessionStorage) {
+                    const keys = Object.keys(sessionStorage);
+                    sessionStorage.clear();
+                    messages.push(`✅ Cleared sessionStorage (${keys.length} items)`);
+                }
+                
+                // 5. Update service worker
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/sw.js').then(registration => {
+                        registration.update();
+                        messages.push('✅ Re-registered and updated service worker');
+                    });
+                }
+                
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = messages.join('<br>') + '<br><br>🎉 All caches cleared! Reload the page for fresh content.';
+                
+                // Auto reload after 2 seconds
+                setTimeout(() => {
+                    window.location.href = '/?nocache=' + Date.now();
+                }, 2000);
+                
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+        
+        // Auto-run on load
+        window.addEventListener('load', () => {
+            // Optional: auto-clear on load
+            // clearEverything();
+        });
+    </script>
+</body>
+</html>

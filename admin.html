@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Zero - Karthik Nagapuri</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/resource-shelf.css">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="nav-brand"></a>
+        <a href="/blog.html" class="nav-link">blog</a>
+        <a href="/resources.html" class="nav-link">resources</a>
+        <a href="https://medium.com/@Karthiknagapuri" class="nav-link">writings</a>
+        <div class="nav-right">
+            <span id="admin-status" class="admin-status"></span>
+            <button id="logout-btn" class="logout-btn" style="display: none;">logout</button>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </div>
+
+    <main class="container">
+        <!-- Login Form -->
+        <section id="login-section" class="login-section">
+            <div class="login-container">
+                <h1>admin access</h1>
+                <p class="subtitle">Enter your credentials to access the admin panel</p>
+                
+                <form id="login-form" class="login-form">
+                    <input type="password" id="admin-password" placeholder="password" required autocomplete="current-password">
+                    <button type="submit">login</button>
+                </form>
+                
+                <div id="login-error" class="error-message"></div>
+            </div>
+        </section>
+
+        <!-- Admin Dashboard (Hidden by default) -->
+        <section id="admin-dashboard" class="admin-dashboard" style="display: none;">
+            <h1>admin dashboard</h1>
+            
+            <!-- Connection Status Indicator -->
+            <div id="connection-status" style="padding: 10px; margin: 10px 0; border-radius: 5px; font-family: monospace; font-size: 14px;">
+                <span id="status-icon"></span>
+                <span id="status-text">Checking connection...</span>
+                <button id="retry-connection" style="display: none; margin-left: 10px; padding: 5px 10px; background: #0f0; color: #000; border: none; cursor: pointer;">Retry Connection</button>
+            </div>
+            
+            <!-- Tab Navigation -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="profile">Profile</button>
+                <button class="tab-btn" data-tab="socials">Social Links</button>
+                <button class="tab-btn" data-tab="blogs">Blog Posts</button>
+                <button class="tab-btn" data-tab="projects">Projects</button>
+                <button class="tab-btn" data-tab="resources">Resources</button>
+                <button class="tab-btn" data-tab="shelf">Resource Shelf</button>
+                <button class="tab-btn" data-tab="messages">Messages</button>
+                <button class="tab-btn" data-tab="settings">Settings</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Profile Tab -->
+                <div id="profile-tab" class="tab-panel active">
+                    <h2>Profile Information</h2>
+                    <form id="profile-form" class="admin-form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" value="Karthik Nagapuri" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" name="title" value="AI Engineer | Founder | Ecosystem Builder" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" value="karthik@evolvex.in" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" value="+91 98765 43210">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" name="location" value="Hyderabad, India">
+                        </div>
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <textarea name="bio" rows="4">From a rural farming family to building founder-first ecosystems across Bharat. Founded 4 startups, mentored MSMEs, hosted 100+ events.</textarea>
+                        </div>
+                        <button type="submit" class="save-btn">Save Profile</button>
+                    </form>
+                </div>
+
+                <!-- Social Links Tab -->
+                <div id="socials-tab" class="tab-panel">
+                    <h2>Social Links</h2>
+                    <form id="socials-form" class="admin-form">
+                        <div id="social-links-container">
+                            <!-- Social links will be dynamically loaded here -->
+                        </div>
+                        <button type="button" id="add-social-btn" class="add-btn">+ Add Social Link</button>
+                        <button type="submit" class="save-btn">Save Social Links</button>
+                    </form>
+                </div>
+
+                <!-- Blog Posts Tab -->
+                <div id="blogs-tab" class="tab-panel">
+                    <h2>Blog Posts</h2>
+                    <button id="new-blog-btn" class="add-btn">+ New Blog Post</button>
+                    
+                    <div id="blog-editor" style="display: none;">
+                        <form id="blog-form" class="admin-form">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" name="title" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Slug</label>
+                                <input type="text" name="slug" required pattern="[a-z0-9-]+">
+                            </div>
+                            <div class="form-group">
+                                <label>Excerpt</label>
+                                <textarea name="excerpt" rows="2" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Content (Markdown)</label>
+                                <textarea name="content" rows="10" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Tags (comma separated)</label>
+                                <input type="text" name="tags" placeholder="ai, technology, startups">
+                            </div>
+                            <div class="form-group">
+                                <label>Read Time (minutes)</label>
+                                <input type="number" name="readTime" min="1" value="5">
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">Save Blog Post</button>
+                                <button type="button" id="cancel-blog-btn" class="cancel-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div id="blogs-list" class="items-list">
+                        <!-- Blog posts will be listed here -->
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div id="projects-tab" class="tab-panel">
+                    <h2>Projects</h2>
+                    <button id="new-project-btn" class="add-btn">+ New Project</button>
+                    
+                    <div id="project-editor" style="display: none;">
+                        <form id="project-form" class="admin-form">
+                            <div class="form-group">
+                                <label>Project Name</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Tech Stack</label>
+                                <input type="text" name="techStack" placeholder="React, Node.js, MongoDB">
+                            </div>
+                            <div class="form-group">
+                                <label>URL</label>
+                                <input type="url" name="url" placeholder="https://example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>GitHub URL</label>
+                                <input type="url" name="github" placeholder="https://github.com/username/repo">
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select name="status">
+                                    <option value="active">Active</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="archived">Archived</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">Save Project</button>
+                                <button type="button" id="cancel-project-btn" class="cancel-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div id="projects-list" class="items-list">
+                        <!-- Projects will be listed here -->
+                    </div>
+                </div>
+
+                <!-- Resources Tab -->
+                <div id="resources-tab" class="tab-panel">
+                    <h2>Resources & Links</h2>
+                    <button id="new-resource-btn" class="add-btn">+ New Resource</button>
+                    
+                    <div id="resource-editor" style="display: none;">
+                        <form id="resource-form" class="admin-form">
+                            <div class="form-group">
+                                <label>Resource Name</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select name="category">
+                                    <option value="tool">Tool</option>
+                                    <option value="article">Article</option>
+                                    <option value="video">Video</option>
+                                    <option value="course">Course</option>
+                                    <option value="book">Book</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>URL</label>
+                                <input type="url" name="url" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" rows="2"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">Save Resource</button>
+                                <button type="button" id="cancel-resource-btn" class="cancel-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div id="resources-list" class="items-list">
+                        <!-- Resources will be listed here -->
+                    </div>
+                </div>
+
+                <!-- Messages Tab -->
+                <div id="messages-tab" class="tab-panel">
+                    <h2>Contact Messages</h2>
+                    <div id="messages-list" class="messages-list">
+                        <!-- Messages will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-panel">
+                    <h2>Settings</h2>
+                    <form id="settings-form" class="admin-form">
+                        <div class="form-group">
+                            <label>Change Admin Password</label>
+                            <input type="password" name="newPassword" placeholder="New password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" name="confirmPassword" placeholder="Confirm password">
+                        </div>
+                        <button type="submit" class="save-btn">Update Password</button>
+                    </form>
+                    
+                    <div class="danger-zone">
+                        <h3>Danger Zone</h3>
+                        <button id="export-data-btn" class="export-btn">Export All Data</button>
+                        <button id="import-data-btn" class="import-btn">Import Data</button>
+                        <input type="file" id="import-file" accept=".json" style="display: none;">
+                        <button id="clear-cache-btn" class="danger-btn">Clear Cache</button>
+                    </div>
+                </div>
+
+                <!-- Resource Shelf Tab -->
+                <div id="shelf-tab" class="tab-panel">
+                    <div class="resource-shelf-header">
+                        <h2>Resource Shelf</h2>
+                        <div class="resource-shelf-actions">
+                            <input type="text" id="resource-search" class="resource-search" placeholder="Search resources..." onkeyup="filterResources()">
+                            <select id="resource-filter" class="resource-filter" onchange="filterResources()">
+                                <option value="">All Categories</option>
+                                <option value="startup">Startup & Entrepreneurship</option>
+                                <option value="ai">AI & Machine Learning</option>
+                                <option value="development">Development</option>
+                                <option value="design">Design & UX</option>
+                                <option value="marketing">Marketing & Growth</option>
+                                <option value="productivity">Productivity</option>
+                                <option value="finance">Finance</option>
+                                <option value="leadership">Leadership</option>
+                                <option value="learning">Learning</option>
+                            </select>
+                            <button id="add-resource-btn" class="add-btn">+ Add Resource</button>
+                        </div>
+                    </div>
+                    
+                    <div id="resource-shelf-container" class="resource-shelf-container">
+                        <!-- Resources will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Add Resource Popup -->
+        <div id="add-resource-popup" class="add-resource-popup">
+            <div class="popup-header">
+                <h3>Add New Resource</h3>
+                <button class="popup-close" onclick="closeResourcePopup()">×</button>
+            </div>
+            <form id="add-resource-form" onsubmit="handleAddResource(event)">
+                <div class="form-group">
+                    <label>URL *</label>
+                    <input type="url" id="resource-url" placeholder="https://example.com/article" required>
+                </div>
+                <div class="form-group">
+                    <label>Notes (optional)</label>
+                    <textarea id="resource-notes" rows="3" placeholder="Your thoughts or key points..."></textarea>
+                </div>
+                <button type="submit" class="save-btn">Add & Auto-Enrich</button>
+                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.85rem;">
+                    The resource will be automatically scraped, categorized, and enriched with AI insights.
+                </p>
+            </form>
+        </div>
+        
+        <!-- Loading State -->
+        <div id="resource-loader" class="resource-loader">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Analyzing resource with AI...</div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div style="font-size: 0.8rem; color: var(--text-secondary);">
+            admin panel · © 2024 karthik nagapuri
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/resource-shelf.js"></script>
+    <script src="js/admin-supabase.js"></script>
+    <script>
+        // Resource Shelf Functions
+        function filterResources() {
+            const search = document.getElementById('resource-search').value;
+            const category = document.getElementById('resource-filter').value;
+            resourceShelf.renderResources({ search, category });
+        }
+        
+        function closeResourcePopup() {
+            document.getElementById('add-resource-popup').classList.remove('show');
+        }
+        
+        function handleAddResource(event) {
+            event.preventDefault();
+            const url = document.getElementById('resource-url').value;
+            const notes = document.getElementById('resource-notes').value;
+            
+            resourceShelf.addResource(url, { notes }).then(result => {
+                if (result.success) {
+                    closeResourcePopup();
+                    document.getElementById('add-resource-form').reset();
+                    showSuccessMessage('Resource added successfully!');
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            });
+        }
+        
+        // Initialize Resource Shelf when tab is clicked
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add initial resource
+            const initialUrl = 'https://henrythe9th.substack.com/p/how-to-start-a-lean-ai-native-startup';
+            if (!localStorage.getItem('initialResourceAdded')) {
+                resourceShelf.addResource(initialUrl).then(() => {
+                    localStorage.setItem('initialResourceAdded', 'true');
+                });
+            }
+            
+            // Function to setup resource shelf tab
+            function setupResourceShelfTab() {
+                // Setup add resource button
+                const addBtn = document.getElementById('add-resource-btn');
+                if (addBtn && !addBtn.hasAttribute('data-initialized')) {
+                    addBtn.setAttribute('data-initialized', 'true');
+                    addBtn.addEventListener('click', () => {
+                        const popup = document.getElementById('add-resource-popup');
+                        if (popup) {
+                            popup.classList.add('show');
+                        }
+                    });
+                }
+                
+                // Render resources
+                resourceShelf.renderResources();
+            }
+            
+            // Load resources when shelf tab is clicked
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === 'shelf') {
+                    btn.addEventListener('click', () => {
+                        setTimeout(setupResourceShelfTab, 100);
+                    });
+                }
+            });
+            
+            // Also setup if shelf tab is already active on load
+            const activeTab = document.querySelector('.tab-panel.active');
+            if (activeTab && activeTab.id === 'shelf-tab') {
+                setupResourceShelfTab();
+            }
+        });
+    </script>
+</body>
+</html>

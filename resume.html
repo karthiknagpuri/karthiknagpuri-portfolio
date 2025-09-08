@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume | Karthik Nagapuri</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+        }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.2rem; margin: 1.5rem 0 0.5rem; border-bottom: 2px solid #b794f6; padding-bottom: 0.25rem; }
+        h3 { font-size: 1rem; margin: 0.5rem 0; }
+        .header { text-align: center; margin-bottom: 2rem; }
+        .contact { display: flex; justify-content: center; gap: 1rem; margin: 0.5rem 0; font-size: 0.9rem; }
+        .section { margin-bottom: 1.5rem; }
+        .experience-item, .project-item { margin-bottom: 1rem; }
+        .date { color: #666; font-size: 0.9rem; }
+        ul { margin-left: 1.5rem; }
+        @media print {
+            body { padding: 0; }
+            .no-print { display: none; }
+        }
+        .download-btn {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #b794f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        @media print { .download-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <a href="#" onclick="window.print(); return false;" class="download-btn no-print">Download PDF</a>
+    
+    <div class="header">
+        <h1>Karthik Nagapuri (Zero)</h1>
+        <div class="contact">
+            <span>📧 karthik@evolvex.in</span>
+            <span>📱 +91 98765 43210</span>
+            <span>📍 Hyderabad, India</span>
+        </div>
+        <div class="contact">
+            <span>🔗 linkedin.com/in/karthiknagpuri</span>
+            <span>🐙 github.com/karthiknagapuri</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Professional Summary</h2>
+        <p>AI Engineer, Founder, and Ecosystem Builder with 4+ years of experience building startups and communities. From a rural farming background to engineering founder-first ecosystems across India. Founded 4 startups, mentored 100+ MSMEs, and organized 100+ startup events.</p>
+    </div>
+
+    <div class="section">
+        <h2>Experience</h2>
+        
+        <div class="experience-item">
+            <h3>Founder & CEO - EvolveX</h3>
+            <div class="date">2023 - Present</div>
+            <ul>
+                <li>Building startup ecosystems connecting communities across 5+ Indian cities</li>
+                <li>Organized 50+ startup mixers with founders, investors, and CEOs</li>
+                <li>Mentored 100+ early-stage founders and studentpreneurs</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <h3>Founder - Feedbuzz</h3>
+            <div class="date">2023 - Present</div>
+            <ul>
+                <li>Built modern content platform revolutionizing information consumption</li>
+                <li>Developed full-stack solution using React, Node.js, and MongoDB</li>
+                <li>Growing active user base with innovative content delivery mechanisms</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <h3>CTO - Nexteen & FeatureInndia</h3>
+            <div class="date">2022 - Present</div>
+            <ul>
+                <li>Leading technical strategy for next-generation solutions</li>
+                <li>Architecting AI/ML solutions with Python and cloud-native technologies</li>
+                <li>Managing multiple products in production</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <h3>AI Fellow - Suzuki, Kairos & EV India</h3>
+            <div class="date">2023 - 2024</div>
+            <ul>
+                <li>Implemented AI solutions for 50+ startups</li>
+                <li>Developed AI integration strategies for traditional businesses</li>
+                <li>Conducted workshops on AI adoption in Indian startup ecosystem</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <h3>Vice President - CodingCubs, Anurag University</h3>
+            <div class="date">2021 - 2023</div>
+            <ul>
+                <li>Elevated tech community to 500+ active members</li>
+                <li>Organized 50+ technical workshops and hackathons</li>
+                <li>Directed team growth and community building initiatives</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Education & Fellowships</h2>
+        <ul>
+            <li><strong>Founding Fellow</strong> - Kairos School of Business (2023)</li>
+            <li><strong>Emergent Ventures India Fellow</strong> - 2022</li>
+            <li><strong>TiE Fellowship</strong> & <strong>Young India Fellowship</strong> Participant</li>
+            <li><strong>Jagriti Yatra</strong> & <strong>Acumen India Fellowship</strong> Alumni</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Technical Skills</h2>
+        <ul>
+            <li><strong>Languages:</strong> JavaScript, Python, TypeScript, HTML/CSS</li>
+            <li><strong>Frameworks:</strong> React, Node.js, Next.js, Express, FastAPI</li>
+            <li><strong>AI/ML:</strong> TensorFlow, PyTorch, OpenAI APIs, LangChain</li>
+            <li><strong>Databases:</strong> MongoDB, PostgreSQL, Redis</li>
+            <li><strong>Cloud:</strong> AWS, Vercel, Docker, Kubernetes</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Achievements</h2>
+        <ul>
+            <li>SafBlock Team - Top 9 from 130+ teams in national startup competition</li>
+            <li>Organized 100+ startup events across Hyderabad</li>
+            <li>Mentored and accelerated 100+ MSMEs</li>
+            <li>Built communities with 1000+ active members</li>
+        </ul>
+    </div>
+</body>
+</html>

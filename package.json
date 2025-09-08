@@ -1,0 +1,35 @@
+{
+  "name": "karthiknagapuri-personal-website",
+  "version": "1.0.0",
+  "description": "Minimal personal website for Karthik Nagapuri",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000",
+    "apply-schema": "node apply-schema.js",
+    "test-connection": "node test-connection.js",
+    "setup-backend": "node populate-backend.js",
+    "setup-backend-enhanced": "node populate-with-auth.js",
+    "test-backend": "node populate-backend.js --test-connection",
+    "verify-data": "node verify-data.js",
+    "backup-data": "node populate-backend.js --backup-only",
+    "populate": "node populate-backend.js && node verify-data.js",
+    "populate-enhanced": "node populate-with-auth.js && node verify-data.js"
+  },
+  "keywords": [
+    "personal",
+    "website",
+    "portfolio",
+    "blog",
+    "minimal"
+  ],
+  "author": "Karthik Nagapuri",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karthiknagapuri/personal-website"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.2"
+  }
+}

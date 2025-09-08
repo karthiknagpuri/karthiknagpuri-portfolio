@@ -1,0 +1,323 @@
+{
+  "profile": {
+    "name": "Karthik Nagapuri",
+    "title": "AI Engineer | Founder | Ecosystem Builder",
+    "email": "karthik@evolvex.in",
+    "phone": "+91 98765 43210",
+    "location": "Hyderabad, India",
+    "bio": "From a rural farming family to building founder-first ecosystems across Bharat. Founded 4 startups, mentored MSMEs, hosted 100+ events.",
+    "about": "I'm Zero [ Karthik Nagapuri ] — an AI engineer, founder, and ecosystem builder. From a rural farming family to building founder-first ecosystems across Bharat.\n\nFounded 4 startups, mentored MSMEs, hosted 100+ events. Pioneering AI solutions at EvolveX while creating Founder Quest — a 48-state journey documenting India's entrepreneurial spirit.\n\nCurrent: Building 21st-century digital infrastructure. Passionate about AI democratization, rural entrepreneurship, and creating the future."
+  },
+  
+  "social_links": [
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/karthiknagapuri",
+      "icon": "github",
+      "order_index": 1
+    },
+    {
+      "platform": "LinkedIn", 
+      "url": "https://linkedin.com/in/karthiknagpuri",
+      "icon": "linkedin",
+      "order_index": 2
+    },
+    {
+      "platform": "Twitter",
+      "url": "https://twitter.com/karthiknagpuri",
+      "icon": "twitter", 
+      "order_index": 3
+    },
+    {
+      "platform": "Medium",
+      "url": "https://medium.com/@Karthiknagapuri",
+      "icon": "medium",
+      "order_index": 4
+    },
+    {
+      "platform": "Website",
+      "url": "https://karthiknagapuri.com",
+      "icon": "globe",
+      "order_index": 5
+    }
+  ],
+  
+  "blogs": [
+    {
+      "title": "Building AI-Native Startups: Lessons from the Trenches",
+      "slug": "building-ai-native-startups-lessons",
+      "excerpt": "After founding 4 startups and mentoring 1000+ founders, here are the key insights for building successful AI-native companies in 2024.",
+      "content": "# Building AI-Native Startups: Lessons from the Trenches\n\nAfter founding 4 startups and mentoring over 1000 founders, I've learned that building AI-native companies requires a fundamentally different approach than traditional startups.\n\n## The New Paradigm\n\nAI-native startups aren't just adding AI features to existing products—they're reimagining entire workflows around intelligent automation.\n\n### Key Principles:\n\n1. **Data-First Architecture**: Build your data pipeline before your product\n2. **Human-AI Collaboration**: Design for augmentation, not replacement\n3. **Continuous Learning**: Your product gets better with every interaction\n4. **Ethical AI**: Build trust through transparency and fairness\n\n## Practical Strategies\n\n### Start Small, Think Big\n- Begin with a narrow use case where AI provides clear value\n- Focus on 10x improvement, not 10% optimization\n- Build feedback loops from day one\n\n### The Technical Foundation\n```python\n# Example: Simple AI feedback loop\ndef collect_feedback(prediction, actual_result):\n    store_training_data(prediction, actual_result)\n    if should_retrain():\n        trigger_model_update()\n```\n\n### Team Building\n- Hire for AI literacy across all roles\n- Create cross-functional AI teams\n- Invest in continuous learning\n\n## Common Pitfalls\n\n1. **Technology-First Thinking**: Falling in love with the algorithm instead of the problem\n2. **Ignoring Data Quality**: Great models need great data\n3. **Underestimating Compute Costs**: AI can be expensive—plan accordingly\n\n## The Indian Opportunity\n\nIndia has unique advantages in AI:\n- Large, diverse datasets\n- Cost-effective talent pool\n- Growing domestic market\n- Government support for digital transformation\n\n## Conclusion\n\nBuilding AI-native startups is challenging but rewarding. Focus on solving real problems, building great teams, and creating products that get smarter over time.\n\nRemember: The goal isn't to build AI—it's to build better solutions using AI.",
+      "tags": ["AI", "Startups", "Entrepreneurship", "India", "Technology"],
+      "read_time": 8,
+      "published": true,
+      "featured": true
+    },
+    {
+      "title": "The Future of Rural Entrepreneurship in India",
+      "slug": "future-rural-entrepreneurship-india", 
+      "excerpt": "How digital infrastructure and innovative business models are transforming rural Indian entrepreneurship.",
+      "content": "# The Future of Rural Entrepreneurship in India\n\nComing from a rural farming family, I've witnessed firsthand the transformation happening in rural India. Digital infrastructure and innovative business models are creating unprecedented opportunities for rural entrepreneurs.\n\n## The Digital Revolution\n\n### Infrastructure Boom\n- 4G coverage reaching remote villages\n- Digital payment systems like UPI\n- E-commerce platforms connecting rural producers to urban markets\n\n### Success Stories\n\nI've mentored several rural entrepreneurs who've built successful businesses:\n\n1. **Organic Farming Platform**: A farmer from Telangana built a direct-to-consumer organic food platform, reaching customers across India\n2. **Rural EdTech**: An entrepreneur from UP created a vernacular learning platform for rural students\n3. **Handicrafts Marketplace**: A woman from Rajasthan digitized traditional handicrafts, exporting worldwide\n\n## Key Opportunities\n\n### Agriculture Technology\n- Precision farming using IoT sensors\n- AI-powered crop disease detection\n- Supply chain optimization\n\n### Rural Services\n- Healthcare delivery\n- Financial inclusion\n- Education technology\n\n### Manufacturing\n- Small-scale food processing\n- Textiles and handicrafts\n- Renewable energy solutions\n\n## Challenges and Solutions\n\n### Challenge: Limited Access to Capital\n**Solution**: Government schemes, microfinance, and angel networks focusing on rural startups\n\n### Challenge: Skills Gap\n**Solution**: Digital literacy programs and entrepreneurship training\n\n### Challenge: Market Access\n**Solution**: E-commerce platforms and digital marketing\n\n## The Founder Quest Journey\n\nThrough my Founder Quest initiative—documenting entrepreneurship across all 48 Indian states—I've seen incredible innovation happening in small towns and villages.\n\n## What's Next?\n\nRural entrepreneurship in India is at an inflection point. With the right support, we can create millions of jobs and transform lives.\n\n### Action Items:\n1. Invest in rural digital infrastructure\n2. Create entrepreneur support networks\n3. Develop rural-specific business models\n4. Build bridges between rural and urban markets\n\nThe future of Indian entrepreneurship isn't just in Bangalore or Delhi—it's in every village across the country.",
+      "tags": ["Rural", "Entrepreneurship", "India", "Digital", "Agriculture"],
+      "read_time": 6,
+      "published": true,
+      "featured": true
+    },
+    {
+      "title": "EvolveX: Building the Future of AI Solutions",
+      "slug": "evolvex-building-future-ai-solutions",
+      "excerpt": "Inside look at EvolveX, our AI solutions company focused on democratizing artificial intelligence for businesses.",
+      "content": "# EvolveX: Building the Future of AI Solutions\n\nAt EvolveX, we're on a mission to democratize AI and make it accessible to businesses of all sizes. Here's our journey and vision.\n\n## The Vision\n\nWe believe AI shouldn't be a luxury available only to tech giants. Every business, from local shops to global enterprises, should be able to leverage AI to grow and serve their customers better.\n\n## Our Approach\n\n### 1. No-Code AI Platforms\nBuilding tools that let non-technical users create and deploy AI solutions.\n\n### 2. Industry-Specific Solutions\nCustom AI applications for healthcare, education, agriculture, and finance.\n\n### 3. Ethical AI Framework\nEnsuring all our solutions are transparent, fair, and trustworthy.\n\n## Key Products\n\n### AI Assistant Platform\nCustom chatbots and virtual assistants for businesses:\n- 24/7 customer support\n- Multilingual capabilities\n- Integration with existing systems\n\n### Predictive Analytics Suite\nHelping businesses make data-driven decisions:\n- Sales forecasting\n- Inventory optimization\n- Risk assessment\n\n### Computer Vision Solutions\nImage and video analysis for various industries:\n- Quality control in manufacturing\n- Medical image analysis\n- Agricultural monitoring\n\n## Technical Architecture\n\n```python\n# Example: Our modular AI pipeline\nclass AIPipeline:\n    def __init__(self, model_type, industry_domain):\n        self.model = load_model(model_type)\n        self.domain_adapter = DomainAdapter(industry_domain)\n        self.ethics_checker = EthicsValidator()\n    \n    def process(self, input_data):\n        # Validate ethical constraints\n        if not self.ethics_checker.validate(input_data):\n            raise EthicsViolationError()\n        \n        # Process with domain adaptation\n        result = self.model.predict(input_data)\n        return self.domain_adapter.format_output(result)\n```\n\n## Client Success Stories\n\n### Healthcare Startup\n- Deployed AI diagnostic assistant\n- 40% improvement in diagnosis accuracy\n- 60% reduction in patient wait times\n\n### Manufacturing Company\n- Implemented predictive maintenance\n- 30% reduction in downtime\n- ₹2 crore annual savings\n\n### Educational Institution\n- Custom learning management system\n- Personalized learning paths\n- 25% improvement in student outcomes\n\n## Challenges and Learnings\n\n### Data Quality\nMost businesses don't have clean, structured data. We've built tools to help with data preparation and cleaning.\n\n### Change Management\nAI adoption requires cultural change. We focus heavily on training and change management.\n\n### Regulatory Compliance\nNavigating AI regulations across industries requires careful attention to compliance.\n\n## The Team\n\nOur team combines deep technical expertise with domain knowledge:\n- AI/ML Engineers\n- Industry Experts\n- Ethics Researchers\n- UX Designers\n\n## Looking Ahead\n\n### 2024 Goals\n1. Launch AI marketplace platform\n2. Expand to 5 new industries\n3. Open-source core AI tools\n4. International expansion\n\n### Long-term Vision\nCreate an AI ecosystem where businesses can easily discover, customize, and deploy AI solutions that drive real value.\n\n## Join Us\n\nWe're always looking for passionate people who want to democratize AI. Whether you're a developer, researcher, or business expert, there's a place for you at EvolveX.\n\nTogether, we're not just building AI solutions—we're building the future.",
+      "tags": ["EvolveX", "AI", "Startups", "Technology", "Business"],
+      "read_time": 7,
+      "published": true,
+      "featured": false
+    },
+    {
+      "title": "Developer Tools That Changed My Life",
+      "slug": "developer-tools-changed-my-life",
+      "excerpt": "A curated list of tools, frameworks, and resources that have significantly improved my productivity as a developer.",
+      "content": "# Developer Tools That Changed My Life\n\nOver the years, I've discovered tools that dramatically improved my productivity. Here are the game-changers.\n\n## Code Editors & IDEs\n\n### VS Code + Extensions\nMy daily driver with essential extensions:\n- GitHub Copilot\n- GitLens\n- Thunder Client\n- Prettier\n- ESLint\n\n### Cursor\nAI-powered code editor that's revolutionizing how I write code.\n\n## Development Environment\n\n### Docker\nContainerization made deployment predictable:\n```dockerfile\nFROM node:18-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD [\"npm\", \"start\"]\n```\n\n### GitHub Actions\nAutomated CI/CD pipelines:\n```yaml\nname: Deploy\non:\n  push:\n    branches: [main]\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v2\n      - name: Deploy\n        run: npm run deploy\n```\n\n## Database & Backend\n\n### Supabase\nOpen-source Firebase alternative:\n- Real-time database\n- Built-in authentication\n- Auto-generated APIs\n- File storage\n\n### Vercel\nSeamless deployment platform:\n- Git integration\n- Edge functions\n- Analytics\n- Preview deployments\n\n## AI Tools\n\n### GitHub Copilot\nAI pair programmer that suggests code in real-time.\n\n### Claude\nAdvanced AI assistant for complex problem-solving and code review.\n\n### ChatGPT\nQuick answers and code explanations.\n\n## Design & Frontend\n\n### Tailwind CSS\nUtility-first CSS framework:\n```html\n<div class=\"bg-blue-500 text-white p-4 rounded-lg shadow-lg\">\n  Beautiful components with minimal CSS\n</div>\n```\n\n### Figma\nCollaborative design tool that bridges design-development gap.\n\n## Productivity Tools\n\n### Linear\nIssue tracking that developers actually want to use.\n\n### Notion\nAll-in-one workspace for documentation and planning.\n\n### Raycast\nmacOS launcher and productivity app.\n\n## Monitoring & Analytics\n\n### Sentry\nError tracking and performance monitoring.\n\n### Posthog\nProduct analytics and feature flags.\n\n### Uptime Robot\nWebsite monitoring and alerts.\n\n## Learning & Research\n\n### Obsidian\nKnowledge management with linked notes.\n\n### DevDocs\nOffline documentation browser.\n\n### GitHub\nOpen-source learning and collaboration.\n\n## Command Line Tools\n\n### oh-my-zsh\nPowerful shell configuration.\n\n### exa\nModern replacement for ls.\n\n### httpie\nUser-friendly HTTP client.\n\n### jq\nJSON processor for API testing.\n\n## My Setup\n\n### Hardware\n- MacBook Pro M2\n- External 4K monitor\n- Mechanical keyboard\n- Trackball mouse\n\n### Software Stack\n- React/Next.js for frontend\n- Node.js/Express for backend\n- PostgreSQL for database\n- Tailwind for styling\n\n## Productivity Tips\n\n1. **Automate repetitive tasks** with shell scripts\n2. **Use keyboard shortcuts** for everything\n3. **Keep learning** new tools and techniques\n4. **Share knowledge** with team members\n\n## Tool Selection Criteria\n\n- **Solves a real problem**\n- **Good documentation**\n- **Active community**\n- **Reasonable pricing**\n- **Integration capabilities**\n\nThe right tools can 10x your productivity. Invest time in learning them—it pays dividends.\n\nWhat tools have changed your development workflow? I'm always looking for new recommendations!",
+      "tags": ["Development", "Tools", "Productivity", "Technology"],
+      "read_time": 5,
+      "published": true,
+      "featured": false
+    },
+    {
+      "title": "The Art of Building Technical Teams",
+      "slug": "art-building-technical-teams",
+      "excerpt": "Insights on hiring, managing, and scaling technical teams from founding multiple startups.",
+      "content": "# The Art of Building Technical Teams\n\nBuilding great technical teams is both an art and a science. Here's what I've learned from founding multiple startups.\n\n## Hiring Philosophy\n\n### Look Beyond the Resume\n- **Problem-solving ability** over specific technologies\n- **Learning mindset** over current knowledge\n- **Communication skills** over pure technical ability\n- **Cultural fit** over impressive credentials\n\n### Interview Process\n\n1. **Technical Assessment**\n   - Real-world problems, not algorithmic puzzles\n   - Pair programming sessions\n   - Code review exercises\n\n2. **Cultural Interviews**\n   - Team collaboration scenarios\n   - Handling disagreements\n   - Growth mindset evaluation\n\n3. **Reference Checks**\n   - Always talk to previous colleagues\n   - Ask specific behavioral questions\n\n## Team Structure\n\n### Small Team Dynamics (2-10 people)\n- Everyone wears multiple hats\n- Direct communication\n- Shared ownership of codebase\n\n### Scaling Challenges (10-50 people)\n- Need for specialization\n- Communication overhead\n- Process and documentation\n\n### Enterprise Scale (50+ people)\n- Clear team boundaries\n- Technical leadership hierarchy\n- Formal processes and governance\n\n## Technical Leadership\n\n### The Tech Lead Role\nBalance between:\n- Individual contributor\n- Technical mentor\n- Project coordinator\n- Architecture guardian\n\n### Growing Leaders\n```javascript\n// Leadership development framework\nconst developLeader = (engineer) => {\n  return {\n    technicalSkills: improveCodingSkills(engineer),\n    mentorship: assignMentees(engineer),\n    projectManagement: leadSmallProjects(engineer),\n    communication: presentToStakeholders(engineer)\n  }\n}\n```\n\n## Remote vs In-Person\n\n### Remote Advantages\n- Access to global talent\n- Lower overhead costs\n- Flexible working arrangements\n- Focus time without interruptions\n\n### Remote Challenges\n- Communication overhead\n- Cultural alignment\n- Knowledge sharing\n- Onboarding new members\n\n### Hybrid Approach\n- Core team in same timezone\n- Regular video calls and standups\n- In-person quarterly meetings\n- Async communication tools\n\n## Team Culture\n\n### Core Values\n1. **Continuous Learning**: Encourage experimentation\n2. **Ownership**: Take responsibility for outcomes\n3. **Collaboration**: Help teammates succeed\n4. **Quality**: Build things that last\n\n### Building Psychological Safety\n- Encourage questions and mistakes\n- Regular one-on-ones\n- Open feedback culture\n- Celebrate learning from failures\n\n## Technical Practices\n\n### Code Quality\n- Peer code reviews\n- Automated testing\n- Continuous integration\n- Technical documentation\n\n### Knowledge Sharing\n- Weekly tech talks\n- Internal documentation\n- Mentorship programs\n- Cross-team collaboration\n\n## Common Mistakes\n\n### Hiring Too Fast\n- Compromising on quality for speed\n- Not defining clear role requirements\n- Skipping cultural fit assessment\n\n### Poor Onboarding\n- Lack of structured process\n- No assigned mentor\n- Overwhelming with information\n\n### Ignoring Team Dynamics\n- Not addressing personality conflicts\n- Allowing toxic behavior\n- Failing to recognize contributions\n\n## Metrics That Matter\n\n### Team Health\n- Employee satisfaction scores\n- Retention rates\n- Internal mobility\n- Learning and development participation\n\n### Delivery Metrics\n- Velocity (with quality)\n- Bug rates\n- Customer satisfaction\n- Time to market\n\n## Scaling Strategies\n\n### Team Topology\n- Stream-aligned teams\n- Platform teams\n- Enabling teams\n- Complicated subsystem teams\n\n### Communication Patterns\n- Reduce cognitive load\n- Clear team boundaries\n- Well-defined interfaces\n- Minimal hand-offs\n\n## Personal Growth\n\n### Career Paths\n- Individual contributor track\n- Management track\n- Technical leadership track\n- Entrepreneurship track\n\n### Skill Development\n- Technical skills\n- Soft skills\n- Industry knowledge\n- Business acumen\n\n## Conclusion\n\nBuilding great technical teams requires:\n- Intentional hiring\n- Strong culture\n- Good processes\n- Continuous improvement\n\nThe best teams are more than the sum of their parts. They amplify each other's strengths and cover for weaknesses.\n\nInvest in people, and they'll build amazing things.",
+      "tags": ["Management", "Teams", "Leadership", "Startups"],
+      "read_time": 9,
+      "published": true,
+      "featured": false
+    }
+  ],
+  
+  "projects": [
+    {
+      "name": "EvolveX AI Platform",
+      "description": "Enterprise AI platform enabling businesses to build, deploy, and scale AI solutions without deep technical expertise.",
+      "tech_stack": ["Python", "React", "PostgreSQL", "Docker", "Kubernetes", "TensorFlow"],
+      "url": "https://evolvex.in",
+      "github_url": null,
+      "image_url": null,
+      "status": "active",
+      "featured": true
+    },
+    {
+      "name": "Founder Quest",
+      "description": "48-state journey documenting India's entrepreneurial ecosystem. Creating content, connections, and opportunities for founders across Bharat.",
+      "tech_stack": ["Next.js", "Supabase", "Tailwind CSS", "Vercel"],
+      "url": "https://founderquest.in",
+      "github_url": null,
+      "image_url": null,
+      "status": "active", 
+      "featured": true
+    },
+    {
+      "name": "Rural EdTech Platform",
+      "description": "Vernacular learning platform for rural students with offline capabilities and adaptive learning algorithms.",
+      "tech_stack": ["React Native", "Node.js", "MongoDB", "AWS", "TensorFlow"],
+      "url": null,
+      "github_url": null,
+      "image_url": null,
+      "status": "completed",
+      "featured": false
+    },
+    {
+      "name": "Agricultural IoT System",
+      "description": "IoT-based precision farming solution helping farmers optimize crop yields through real-time monitoring and AI insights.",
+      "tech_stack": ["Python", "IoT Sensors", "InfluxDB", "Grafana", "Machine Learning"],
+      "url": null,
+      "github_url": null,
+      "image_url": null,
+      "status": "completed",
+      "featured": false
+    },
+    {
+      "name": "Healthcare Diagnostics AI",
+      "description": "AI-powered diagnostic assistant for rural healthcare centers, improving diagnosis accuracy and patient outcomes.",
+      "tech_stack": ["Python", "TensorFlow", "Flask", "PostgreSQL", "Docker"],
+      "url": null,
+      "github_url": null,
+      "image_url": null,
+      "status": "completed",
+      "featured": false
+    },
+    {
+      "name": "Personal Portfolio",
+      "description": "Modern, minimal personal website built with vanilla HTML, CSS, and JavaScript. Features blog, projects, and resource management.",
+      "tech_stack": ["HTML", "CSS", "JavaScript", "Supabase", "PWA"],
+      "url": "https://karthiknagapuri.com",
+      "github_url": "https://github.com/karthiknagapuri/portfolio",
+      "image_url": null,
+      "status": "active",
+      "featured": true
+    },
+    {
+      "name": "AI Code Assistant",
+      "description": "Internal AI tool for code generation, review, and documentation. Integrated with GitHub and Slack for team workflows.",
+      "tech_stack": ["Python", "OpenAI API", "FastAPI", "Redis", "Docker"],
+      "url": null,
+      "github_url": "https://github.com/karthiknagapuri/ai-code-assistant",
+      "image_url": null,
+      "status": "active",
+      "featured": false
+    },
+    {
+      "name": "Microfinance Platform",
+      "description": "Digital platform connecting rural entrepreneurs with microfinance institutions. Includes credit scoring and loan management.",
+      "tech_stack": ["Django", "PostgreSQL", "React", "Docker", "AWS"],
+      "url": null,
+      "github_url": null,
+      "image_url": null,
+      "status": "completed",
+      "featured": false
+    }
+  ],
+  
+  "resources": [
+    {
+      "name": "How to Start a Lean AI Startup",
+      "category": "startups",
+      "url": "https://henrythe9th.substack.com/p/how-to-start-a-lean-ai-native-startup",
+      "description": "Comprehensive guide on building AI-native startups with minimal resources. Covers validation, MVP development, and scaling strategies.",
+      "featured": true
+    },
+    {
+      "name": "React 18 Documentation",
+      "category": "development",
+      "url": "https://react.dev",
+      "description": "Official React documentation with tutorials, API reference, and best practices for modern React development.",
+      "featured": false
+    },
+    {
+      "name": "Supabase Quickstart Guide",
+      "category": "backend",
+      "url": "https://supabase.com/docs/guides/getting-started",
+      "description": "Complete guide to getting started with Supabase - the open source Firebase alternative with PostgreSQL.",
+      "featured": true
+    },
+    {
+      "name": "GitHub Copilot",
+      "category": "ai-tools",
+      "url": "https://github.com/features/copilot",
+      "description": "AI pair programmer that helps write code faster with whole-line and full function suggestions.",
+      "featured": true
+    },
+    {
+      "name": "TailwindCSS Framework",
+      "category": "frontend",
+      "url": "https://tailwindcss.com",
+      "description": "Utility-first CSS framework for rapidly building custom user interfaces with minimal CSS.",
+      "featured": false
+    },
+    {
+      "name": "Claude AI Assistant",
+      "category": "ai-tools",
+      "url": "https://claude.ai",
+      "description": "Advanced AI assistant for analysis, writing, coding, and complex problem-solving tasks.",
+      "featured": true
+    },
+    {
+      "name": "Vercel Platform",
+      "category": "deployment",
+      "url": "https://vercel.com",
+      "description": "Frontend cloud platform for deploying and hosting web applications with excellent developer experience.",
+      "featured": false
+    },
+    {
+      "name": "Linear Project Management",
+      "category": "productivity",
+      "url": "https://linear.app",
+      "description": "Issue tracking and project management tool designed for high-performance software development teams.",
+      "featured": false
+    },
+    {
+      "name": "Notion Workspace",
+      "category": "productivity",
+      "url": "https://notion.so",
+      "description": "All-in-one workspace for notes, docs, wikis, and project management with powerful database features.",
+      "featured": false
+    },
+    {
+      "name": "Python FastAPI",
+      "category": "backend",
+      "url": "https://fastapi.tiangolo.com",
+      "description": "Modern, fast web framework for building APIs with Python based on standard Python type hints.",
+      "featured": false
+    },
+    {
+      "name": "Docker Documentation",
+      "category": "devops",
+      "url": "https://docs.docker.com",
+      "description": "Complete guide to containerization with Docker, including best practices and deployment strategies.",
+      "featured": false
+    },
+    {
+      "name": "Kubernetes Tutorial",
+      "category": "devops",
+      "url": "https://kubernetes.io/docs/tutorials/",
+      "description": "Official Kubernetes tutorials covering container orchestration, deployments, and cluster management.",
+      "featured": false
+    },
+    {
+      "name": "PostgreSQL Guide",
+      "category": "database",
+      "url": "https://www.postgresql.org/docs/",
+      "description": "Comprehensive documentation for PostgreSQL, the world's most advanced open source relational database.",
+      "featured": false
+    },
+    {
+      "name": "AWS Services Overview",
+      "category": "cloud",
+      "url": "https://aws.amazon.com/products/",
+      "description": "Complete overview of Amazon Web Services cloud computing platform and its various services.",
+      "featured": false
+    },
+    {
+      "name": "Machine Learning Crash Course",
+      "category": "ai-learning",
+      "url": "https://developers.google.com/machine-learning/crash-course",
+      "description": "Google's fast-paced, practical introduction to machine learning with TensorFlow APIs.",
+      "featured": true
+    },
+    {
+      "name": "Y Combinator Startup School",
+      "category": "startups",
+      "url": "https://startupschool.org",
+      "description": "Free online course covering startup fundamentals, from idea to IPO, by Y Combinator.",
+      "featured": true
+    },
+    {
+      "name": "First Round Review",
+      "category": "startups",
+      "url": "https://review.firstround.com",
+      "description": "In-depth articles on startup strategy, hiring, culture, and growth from First Round Capital.",
+      "featured": false
+    },
+    {
+      "name": "Indie Hackers Community",
+      "category": "community",
+      "url": "https://indiehackers.com",
+      "description": "Community of independent entrepreneurs sharing revenue numbers, growth strategies, and building stories.",
+      "featured": false
+    },
+    {
+      "name": "Product Hunt",
+      "category": "discovery",
+      "url": "https://producthunt.com",
+      "description": "Platform for discovering new products, sharing launches, and connecting with makers and early adopters.",
+      "featured": false
+    },
+    {
+      "name": "GitHub Trending",
+      "category": "development",
+      "url": "https://github.com/trending",
+      "description": "Discover trending repositories and developers on GitHub across different programming languages.",
+      "featured": false
+    }
+  ]
+}
