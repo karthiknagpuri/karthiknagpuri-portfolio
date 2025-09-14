@@ -1,0 +1,168 @@
+/* Footer Pixel Animation - 16:9 Aspect Ratio */
+.footer-pixel-animation {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    height: 540px;
+    margin: 4rem auto 2rem;
+    overflow: hidden;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
+}
+
+/* Maintain 16:9 aspect ratio */
+.footer-pixel-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden;
+}
+
+.footer-pixel-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(32, 1fr);
+    grid-template-rows: repeat(18, 1fr);
+    gap: 1px;
+}
+
+/* Individual pixels */
+.footer-pixel {
+    background: transparent;
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+.footer-pixel.active {
+    background: var(--text);
+    opacity: 0.8;
+    animation: pixelPulse 2s ease-in-out infinite;
+}
+
+.footer-pixel.wave {
+    background: var(--text-secondary);
+    animation: waveMotion 3s ease-in-out infinite;
+}
+
+.footer-pixel.star {
+    background: var(--text);
+    animation: starTwinkle 4s ease-in-out infinite;
+}
+
+/* Animated wave pattern */
+@keyframes waveMotion {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-5px);
+        opacity: 0.8;
+    }
+}
+
+/* Star twinkle effect */
+@keyframes starTwinkle {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Pulse effect */
+@keyframes pixelPulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Floating text pixels */
+.pixel-text {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    color: var(--text);
+    opacity: 0.8;
+}
+
+.pixel-char {
+    display: inline-block;
+    animation: floatChar 3s ease-in-out infinite;
+}
+
+.pixel-char:nth-child(1) { animation-delay: 0s; }
+.pixel-char:nth-child(2) { animation-delay: 0.1s; }
+.pixel-char:nth-child(3) { animation-delay: 0.2s; }
+.pixel-char:nth-child(4) { animation-delay: 0.3s; }
+.pixel-char:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes floatChar {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Particle trail effect */
+.pixel-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--text-secondary);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.pixel-particle.active {
+    animation: particleFloat 2s linear forwards;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(100px, -100px);
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-pixel-canvas {
+        grid-template-columns: repeat(16, 1fr);
+        grid-template-rows: repeat(9, 1fr);
+    }
+    
+    .pixel-text {
+        font-size: 1.5rem;
+    }
+}
+
+/* Dark mode optimization */
+[data-theme="dark"] .footer-pixel.active {
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] .footer-pixel.active {
+    background: var(--text);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}

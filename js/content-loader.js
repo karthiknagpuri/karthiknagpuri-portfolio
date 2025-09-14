@@ -62,21 +62,24 @@ async function loadSocialLinks() {
             });
         }
         
-        // Update footer social links
+        // Update footer social links - RE-ENABLED
         const footerLinks = document.querySelector('.footer-links');
         if (footerLinks) {
-            // Keep existing links but add social links
-            const existingSocials = footerLinks.querySelectorAll('a[href*="github"], a[href*="twitter"], a[href*="linkedin"]');
-            existingSocials.forEach(link => link.remove());
+            // Keep existing links but ensure no duplicates
+            const existingSocials = footerLinks.querySelectorAll('a[href*="github"], a[href*="twitter"], a[href*="linkedin"], a[href*="medium"]');
+            const existingUrls = Array.from(existingSocials).map(link => link.href);
             
             socials.forEach(social => {
-                const link = document.createElement('a');
-                link.href = social.url;
-                link.className = 'footer-link';
-                link.textContent = social.platform.toLowerCase();
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                footerLinks.appendChild(link);
+                // Only add if not already present
+                if (!existingUrls.includes(social.url)) {
+                    const link = document.createElement('a');
+                    link.href = social.url;
+                    link.className = 'footer-link';
+                    link.textContent = social.platform.toLowerCase();
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    footerLinks.appendChild(link);
+                }
             });
         }
     }
@@ -172,8 +175,28 @@ async function loadBlogPosts() {
                         </div>
                     ` : ''}
                 </a>
+                <div style="margin-top:.5rem; display:flex; gap:.5rem;">
+                    <button class="blog-share" data-slug="${blog.slug}">share</button>
+                </div>
             `;
             blogContainer.appendChild(blogCard);
+        });
+
+        // Share buttons
+        blogContainer.addEventListener('click', async (e) => {
+            const btn = e.target.closest('.blog-share');
+            if (!btn) return;
+            const slug = btn.getAttribute('data-slug');
+            const url = window.location.origin + '/blog/' + encodeURIComponent(slug);
+            try {
+                if (navigator.share) {
+                    await navigator.share({ title: 'Blog', text: 'Check this out', url });
+                } else {
+                    await navigator.clipboard.writeText(url);
+                    btn.textContent = 'copied!';
+                    setTimeout(() => btn.textContent = 'share', 1500);
+                }
+            } catch {}
         });
     }
 }

@@ -82,4 +82,58 @@ document.addEventListener('DOMContentLoaded', () => {
         const newViews = viewCount + Math.random() * 0.1;
         view.textContent = newViews.toFixed(1) + unit + ' views';
     });
+    // Deep-link handling for /blog/:slug and share button
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const slug = pathParts[0] === 'blog' && pathParts[1] ? decodeURIComponent(pathParts[1]) : null;
+
+    if (slug) {
+        // Try fetching blog by slug from backend if available
+        fetch(`/api/blogs/${encodeURIComponent(slug)}`)
+            .then(r => r.ok ? r.json() : null)
+            .then(blog => {
+                if (!blog) return;
+                const container = document.getElementById('blog-posts');
+                if (!container) return;
+                container.innerHTML = '';
+                const article = document.createElement('article');
+                article.className = 'blog-post';
+                article.innerHTML = `
+                    <div class="post-header">
+                        <h2 class="post-title">${blog.title}</h2>
+                        <div class="post-meta">
+                            <span class="post-date">${new Date(blog.date || blog.created_at || Date.now()).toLocaleDateString()}</span>
+                            ${blog.read_time ? `<span class="post-read-time">${blog.read_time} min read</span>` : ''}
+                        </div>
+                    </div>
+                    <p class="post-excerpt">${blog.excerpt || ''}</p>
+                    ${blog.content ? `<div class="post-content">${blog.content}</div>` : ''}
+                    <div style="margin-top:1rem;display:flex;gap:.5rem;">
+                        <button id="share-blog-btn" style="padding:.4rem .6rem;">share</button>
+                        <a href="/blog" style="padding:.4rem .6rem;">all posts</a>
+                    </div>
+                `;
+                container.appendChild(article);
+
+                const shareBtn = document.getElementById('share-blog-btn');
+                if (shareBtn) {
+                    shareBtn.addEventListener('click', async () => {
+                        const shareData = {
+                            title: blog.title,
+                            text: blog.excerpt || blog.title,
+                            url: window.location.origin + `/blog/${blog.slug || slug}`
+                        };
+                        try {
+                            if (navigator.share) {
+                                await navigator.share(shareData);
+                            } else {
+                                await navigator.clipboard.writeText(shareData.url);
+                                shareBtn.textContent = 'copied!';
+                                setTimeout(() => shareBtn.textContent = 'share', 1500);
+                            }
+                        } catch {}
+                    });
+                }
+            })
+            .catch(() => {});
+    }
 });

@@ -370,7 +370,7 @@ Type 'story' for a narrative version.`;
 // Terminal Auto-typing Animation
 function typeText(element, text, speed = 30, callback) {
     if (!element) {
-        console.error('typeText: element not found');
+        // console.error('typeText: element not found');
         if (callback) callback();
         return;
     }
@@ -395,17 +395,17 @@ function typeText(element, text, speed = 30, callback) {
 
 // Terminal Input Handler
 function initTerminal() {
-    console.log('Initializing terminal...');
+    // console.log('Initializing terminal...');
     
     const terminalInput = document.getElementById('terminal-input');
     const terminalOutput = document.getElementById('terminal-output');
     
     if (!terminalInput || !terminalOutput) {
-        console.error('Terminal elements not found:', { terminalInput, terminalOutput });
+        // console.error('Terminal elements not found:', { terminalInput, terminalOutput });
         return;
     }
     
-    console.log('Terminal elements found, starting animation...');
+    // console.log('Terminal elements found, starting animation...');
     
     // Clear any existing content
     terminalOutput.innerHTML = '';
@@ -629,7 +629,7 @@ for me, zero isn't emptiness — it's infinite possibility.`, delay: 2000 },
         terminalInputLine.appendChild(terminalSubmitBtn);
     }
     
-    console.log('Terminal initialization complete');
+    // console.log('Terminal initialization complete');
 }
 
 // Theme Management
@@ -674,7 +674,7 @@ function initKeyboardShortcuts() {
                 window.location.href = '/';
                 break;
             case 'b':
-                window.location.href = '/blog.html';
+                window.location.href = '/blog';
                 break;
             case 'c':
                 const contactSection = document.querySelector('.contact-options');
@@ -700,9 +700,9 @@ function initKeyboardShortcuts() {
 
 // Metrics Counter Animation
 function initMetricsCounters() {
-    console.log('Initializing metrics counters...');
+    // console.log('Initializing metrics counters...');
     const metricCards = document.querySelectorAll('.metric-card[data-animate="counter"]');
-    console.log('Found metric cards:', metricCards.length);
+    // console.log('Found metric cards:', metricCards.length);
     
     if (metricCards.length === 0) {
         console.warn('No metric cards found!');
@@ -717,13 +717,13 @@ function initMetricsCounters() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && entry.target.dataset.animate === 'counter') {
-                console.log('Animating counter for card:', entry.target);
+                // console.log('Animating counter for card:', entry.target);
                 const number = entry.target.querySelector('.metric-number');
                 if (number) {
-                    console.log('Found number element:', number, 'with target:', number.dataset.target);
+                    // console.log('Found number element:', number, 'with target:', number.dataset.target);
                     animateCounter(number);
                 } else {
-                    console.error('No .metric-number found in card:', entry.target);
+                    // console.error('No .metric-number found in card:', entry.target);
                 }
                 entry.target.dataset.animate = 'done';
             }
@@ -1004,17 +1004,17 @@ window.pageLoadTime = Date.now();
 
 // Mobile Navigation Toggle
 function initMobileNavigation() {
-    console.log('Initializing mobile navigation...');
+    // console.log('Initializing mobile navigation...');
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
 
     if (!navToggle || !navLinks) {
-        console.warn('Mobile navigation elements not found');
+        // console.warn('Mobile navigation elements not found');
         return;
     }
 
     // Add mobile-menu class for styling
-    navLinks.classList.add('mobile-menu');
+    // navLinks.classList.add('mobile-menu'); // Commented out to fix duplication issue
 
     navToggle.addEventListener('click', () => {
         const isActive = navToggle.classList.contains('active');
@@ -1074,14 +1074,14 @@ document.addEventListener('DOMContentLoaded', () => {
         initKeyboardShortcuts();
         initTypingAnimation();
 
-        console.log('Initializing features...');
+        // console.log('Initializing features...');
         // Removed: initMetricsCounters();
         initExpandableCards();
         initDaysCounter();
         initVisitorCounter();
         initEngagementTracking();
         // Removed: initTimelineAnimation();
-        console.log('Features initialized successfully');
+        // console.log('Features initialized successfully');
     } catch (error) {
         console.error('Error during initialization:', error);
     }

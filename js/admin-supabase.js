@@ -27,6 +27,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Setup event listeners
     setupEventListeners();
+    // Initialize Quill if blog editor exists
+    const quillContainer = document.getElementById('quill-editor');
+    if (quillContainer && window.Quill) {
+        window.quill = new Quill('#quill-editor', {
+            theme: 'snow',
+            placeholder: 'Write your post...',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link', 'blockquote', 'code-block'],
+                    ['clean']
+                ]
+            }
+        });
+    }
 });
 
 function showLoginForm() {
@@ -341,6 +358,7 @@ async function loadBlogs() {
                     <div class="item-actions">
                         <button class="edit-btn" onclick="editBlog('${blog.id}')">Edit</button>
                         <button class="delete-btn" onclick="deleteBlog('${blog.id}')">Delete</button>
+                        ${blog.published ? `<button class="cancel-btn" onclick="togglePublish('${blog.id}', false)">Unpublish</button>` : `<button class="save-btn" onclick="togglePublish('${blog.id}', true)">Publish</button>`}
                     </div>
                 </div>
             `;
@@ -359,12 +377,22 @@ function showBlogEditor(blog = null) {
         document.querySelector('#blog-form [name="title"]').value = blog.title || '';
         document.querySelector('#blog-form [name="slug"]').value = blog.slug || '';
         document.querySelector('#blog-form [name="excerpt"]').value = blog.excerpt || '';
-        document.querySelector('#blog-form [name="content"]').value = blog.content || '';
+        // Populate Quill and hidden content
+        if (window.quill) {
+            try { window.quill.setContents(window.quill.clipboard.convert(blog.content || '')); } catch {}
+        }
+        const hidden = document.getElementById('content-hidden');
+        if (hidden) hidden.value = blog.content || '';
         document.querySelector('#blog-form [name="tags"]').value = blog.tags ? blog.tags.join(', ') : '';
         document.querySelector('#blog-form [name="readTime"]').value = blog.read_time || 5;
+        const pub = document.getElementById('published-checkbox');
+        if (pub) pub.checked = !!blog.published;
         document.getElementById('blog-form').dataset.blogId = blog.id;
     } else {
         document.getElementById('blog-form').reset();
+        const pub = document.getElementById('published-checkbox');
+        if (pub) pub.checked = false;
+        if (window.quill) { try { window.quill.setText(''); } catch {} }
         delete document.getElementById('blog-form').dataset.blogId;
     }
 }
@@ -377,6 +405,12 @@ function hideBlogEditor() {
 async function handleBlogSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
+    // Sync Quill -> hidden textarea
+    if (window.quill) {
+        const html = document.querySelector('#quill-editor .ql-editor').innerHTML;
+        const hidden = document.getElementById('content-hidden');
+        if (hidden) hidden.value = html;
+    }
     const blogData = {
         title: formData.get('title'),
         slug: formData.get('slug'),
@@ -384,7 +418,7 @@ async function handleBlogSubmit(e) {
         content: formData.get('content'),
         tags: formData.get('tags').split(',').map(tag => tag.trim()).filter(Boolean),
         read_time: parseInt(formData.get('readTime')),
-        published: true
+        published: formData.get('published') === 'on'
     };
     
     const blogId = e.target.dataset.blogId;
@@ -431,6 +465,19 @@ window.deleteBlog = async function(id) {
             showSuccessMessage('Blog deleted successfully!');
             loadBlogs();
         }
+    }
+};
+
+window.togglePublish = async function(id, publish) {
+    const { data: blogs } = await db.getBlogs();
+    const blog = blogs ? blogs.find(b => b.id === id) : null;
+    if (!blog) return;
+    const { error } = await db.updateBlog(id, { published: !!publish });
+    if (!error) {
+        showSuccessMessage(publish ? 'Published' : 'Unpublished');
+        loadBlogs();
+    } else {
+        showErrorMessage('Failed to update publish state');
     }
 };
 

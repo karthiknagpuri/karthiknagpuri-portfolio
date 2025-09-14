@@ -1,0 +1,210 @@
+/* Zero to Infinity Section */
+.zero-infinity-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3rem 0;
+    padding: 2rem 0;
+    gap: 3rem;
+}
+
+.zero-image-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    filter: invert(1) contrast(1.2);
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    position: relative;
+    z-index: 2;
+}
+
+.zero-svg {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    position: relative;
+    z-index: 2;
+}
+
+/* Placeholder when image is missing */
+.zero-image-container::before {
+    content: '0';
+    position: absolute;
+    font-size: 10rem;
+    font-family: var(--font-mono);
+    color: rgba(255, 255, 255, 0.2);
+    z-index: 0;
+}
+
+/* Overlay to prevent right-click */
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: transparent;
+}
+
+.pixel-art-canvas {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    display: none; /* Hide the pixel canvas */
+}
+
+.pixel {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: transparent;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+}
+
+.pixel.active {
+    opacity: 1;
+    background: var(--text);
+    transform: scale(1.1);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.pixel.fade {
+    opacity: 0.3;
+}
+
+/* Zero shape pixels */
+.zero-shape .pixel.active {
+    background: var(--text);
+    border-radius: 2px;
+}
+
+/* Infinity shape pixels */
+.infinity-shape .pixel.active {
+    background: var(--text);
+    border-radius: 50%;
+}
+
+.paradox-text {
+    text-align: center;
+    max-width: 600px;
+}
+
+.paradox-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+    font-family: var(--font-mono);
+}
+
+.paradox-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.animation-trigger {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--text-secondary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.animation-trigger:hover {
+    transform: translateY(-2px);
+    border-color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Floating particles effect */
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--text-secondary);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+.particle:nth-child(odd) {
+    animation-delay: 0.5s;
+    animation-duration: 4s;
+}
+
+.particle:nth-child(even) {
+    animation-delay: 1s;
+    animation-duration: 3.5s;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .zero-infinity-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .pixel-art-canvas {
+        width: 280px;
+        height: 180px;
+    }
+    
+    .pixel {
+        width: 7px;
+        height: 7px;
+    }
+    
+    .paradox-title {
+        font-size: 1.3rem;
+    }
+    
+    .paradox-content {
+        font-size: 0.9rem;
+    }
+}

@@ -460,6 +460,10 @@ class ResourceShelf {
                     ${resource.author ? `<span>• ${resource.author}</span>` : ''}
                     <span>• ${resource.category}</span>
                 </div>
+                <div class="resource-actions" style="margin-top:.5rem; display:flex; gap:.5rem;">
+                    <a href="/resources/${encodeURIComponent(resource.id)}" class="resource-share-link">open</a>
+                    <button class="resource-share-btn" data-share-id="${resource.id}">share</button>
+                </div>
             </div>
         `;
     }
@@ -658,3 +662,69 @@ const resourceShelf = new ResourceShelf();
 
 // Export for use in other files
 window.resourceShelf = resourceShelf;
+
+// Deep-link for /resources/:id and share handling
+document.addEventListener('DOMContentLoaded', () => {
+    // Share buttons (event delegation)
+    document.body.addEventListener('click', async (e) => {
+        const shareBtn = e.target.closest('.resource-share-btn');
+        if (shareBtn) {
+            const id = shareBtn.getAttribute('data-share-id');
+            const res = resourceShelf.resources.find(r => r.id === id);
+            const url = window.location.origin + '/resources/' + encodeURIComponent(id);
+            try {
+                if (navigator.share) {
+                    await navigator.share({ title: res?.name || 'Resource', text: res?.description || '', url });
+                } else {
+                    await navigator.clipboard.writeText(url);
+                    shareBtn.textContent = 'copied!';
+                    setTimeout(() => shareBtn.textContent = 'share', 1500);
+                }
+            } catch {}
+        }
+    });
+
+    // Handle deep link
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    if (parts[0] === 'resources' && parts[1]) {
+        const id = decodeURIComponent(parts[1]);
+        const renderDetails = (resource) => {
+            if (!resource) return;
+            // Reuse modal for details
+            resourceShelf.showResourceModal(resource);
+            // Add share to modal header
+            const modal = document.querySelector('.resource-modal');
+            const header = modal?.querySelector('h2');
+            if (header) {
+                const shareBtn = document.createElement('button');
+                shareBtn.textContent = 'share';
+                shareBtn.style.marginLeft = '0.5rem';
+                shareBtn.addEventListener('click', async () => {
+                    const shareUrl = window.location.origin + '/resources/' + encodeURIComponent(resource.id);
+                    try {
+                        if (navigator.share) {
+                            await navigator.share({ title: resource.name, text: resource.description, url: shareUrl });
+                        } else {
+                            await navigator.clipboard.writeText(shareUrl);
+                            shareBtn.textContent = 'copied!';
+                            setTimeout(() => shareBtn.textContent = 'share', 1500);
+                        }
+                    } catch {}
+                });
+                header.after(shareBtn);
+            }
+        };
+
+        // Try local cache first
+        const localRes = resourceShelf.resources.find(r => r.id === id);
+        if (localRes) {
+            renderDetails(localRes);
+        } else {
+            // Try backend
+            fetch(`/api/resources/${encodeURIComponent(id)}`)
+                .then(r => r.ok ? r.json() : null)
+                .then(resource => renderDetails(resource))
+                .catch(() => {});
+        }
+    }
+});

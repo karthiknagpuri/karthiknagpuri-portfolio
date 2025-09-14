@@ -351,6 +351,19 @@ app.post('/api/resources', authenticateToken, async (req, res) => {
     }
 });
 
+app.get('/api/resources/:id', async (req, res) => {
+    try {
+        const resources = JSON.parse(await fs.readFile(RESOURCES_FILE, 'utf8'));
+        const resource = resources.find(r => r.id === req.params.id);
+        if (!resource) {
+            return res.status(404).json({ error: 'Resource not found' });
+        }
+        res.json(resource);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to load resource' });
+    }
+});
+
 app.put('/api/resources/:id', authenticateToken, async (req, res) => {
     try {
         const resources = JSON.parse(await fs.readFile(RESOURCES_FILE, 'utf8'));
@@ -448,6 +461,15 @@ app.post('/api/import', authenticateToken, async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Failed to import data' });
     }
+});
+
+// Clean URL routes to serve HTML without .html and support slugs
+app.get(['/blog', '/blog/:slug'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'blog.html'));
+});
+
+app.get(['/resources', '/resources/:id'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'resources.html'));
 });
 
 // Start server
